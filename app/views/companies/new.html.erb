@@ -1,13 +1,39 @@
-<%= form_with model: company do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :activity %>
-  <%= f.text_field :activity %>
-  <%= f.label :description %>
-  <%= f.text_field :description %>
-  <%= f.label :objectives %>
-  <%= f.text_field :objectives %>
-  <%= f.label :location %>
-  <%= f.text_field :location %>
-  <%= f.submit %>
+<%= simple_form_for @company, html: { class: "container mt-4" } do |f| %>
+  <div class="card shadow-sm p-4">
+    <h2 class="mb-4">Créer une entreprise</h2>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :name, label: "Nom de l'entreprise" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :activity, label: "Secteur d'activité" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.input :description, as: :text, label: "Description", input_html: { rows: 4 } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <%= f.input :objectives, as: :text, label: "Objectifs", input_html: { rows: 3 } %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <%= f.input :location, label: "Localisation" %>
+      </div>
+      <div class="col-md-6">
+        <%= f.input :size, label: "Taille de l'entreprise", collection: ["1-10", "11-50", "51-200", "201-500", "500+"], prompt: "Sélectionne une taille" %>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <%= f.button :submit, "Enregistrer", class: "btn btn-primary" %>
+    </div>
+  </div>
 <% end %>

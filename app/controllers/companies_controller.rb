@@ -1,9 +1,9 @@
 class CompaniesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_company
+  before_action :set_company, only: [:show]
 
 def index
-  @companies = current_user.companies.all
+  @companies = current_user.companies
 end
 
 def show
@@ -21,6 +21,7 @@ def create
       redirect_to companies_path, notice: "Your company's chat was successfully created."
     else
       render :new
+    end
 end
 
   private
