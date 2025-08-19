@@ -1,0 +1,13 @@
+<%= form_with model: company do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :activity %>
+  <%= f.text_field :activity %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <%= f.label :objectives %>
+  <%= f.text_field :objectives %>
+  <%= f.label :location %>
+  <%= f.text_field :location %>
+  <%= f.submit %>
+<% end %>
