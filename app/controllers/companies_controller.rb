@@ -30,7 +30,7 @@ end
     @company = current_user.companies.find(params[:id])
   end
 
-def company_params
+  def company_params
     params.require(:company).permit(:name, :activity, :description, :objectives, :location, :size)
   end
 
