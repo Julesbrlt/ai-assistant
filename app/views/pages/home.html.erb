@@ -1,3 +1,72 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<h1>coucou</h1>
+<div class="container">
+
+  <div class="banner row align-items-center my-5 bg-white p-5">
+    <div class="col-sm-8">
+      <h1 class="fw-bold">L’IA qui guide la croissance de votre entreprise, selon vos objectifs.</h1>
+      <h4 class="text-muted mt-3">
+        Renseignez votre entreprise, définissez vos objectifs, et laissez notre IA vous fournir prévisions, conseils et plans d’action adaptés.
+      </h4>
+      <div class="mt-4">
+        <%= link_to "S'inscrire", new_user_registration_path, class:"btn btn-primary btn-lg me-2"%>
+        <a href="#how" class="btn btn-outline-secondary btn-lg">En savoir plus</a>
+      </div>
+    </div>
+    <div class="col-sm-4 text-center">
+      <%= image_tag "img_robot.jpg", class: "img-fluid rounded-5 shadow" %>
+    </div>
+  </div>
+
+  <div id="how" class="my-5 text-center">
+    <h2 class="fw-bold mb-4">Comment ça marche ?</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="p-3 bg-white p-4 shadow border border-3 border-primary rounded-5">
+          <h4>1. Renseignez vos infos</h4>
+          <p>Nom, description, taille et objectifs de votre entreprise.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 bg-white p-4 shadow border border-3 border-primary rounded-5">
+          <h4>2. L’IA analyse vos données</h4>
+          <p>Notre moteur croise vos infos avec les tendances sectorielles.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="p-3 bg-white p-4 shadow border border-3 border-primary rounded-5">
+          <h4>3. Recevez vos recommandations</h4>
+          <p>Prévisions, conseils et plans d’action personnalisés.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-5 text-center bg-light p-5 rounded">
+    <h2 class="fw-bold mb-4">Cas d’usage concrets</h2>
+    <div class="row">
+      <div class="col-md-4">
+      <div class="p-3 h-100">
+          <h5 class="fw-bold text-primary">Optimisation de la supply chain 🚚</h5>
+          <p>Réduisez vos coûts logistiques grâce à des prévisions précises.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+      <div class="p-3 h-100">
+          <h5 class="fw-bold text-primary">Prévisions de ventes 📈</h5>
+          <p>Anticipez la demande et ajustez vos stocks intelligemment.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+      <div class="p-3 h-100">
+          <h5 class="fw-bold text-primary">Stratégie de croissance 🚀</h5>
+          <p>Identifiez les leviers prioritaires pour booster votre activité.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-5">
+    <h2 class="fw-bold">Prêt à transformer vos décisions business ?</h2>
+    <%= link_to "Inscrivez-vous", new_user_registration_path, class:"btn btn-primary btn-lg mt-3"%>
+  </div>
+
+</div>
