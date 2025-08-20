@@ -1,0 +1,15 @@
+<ul class="position-sticky sticky-top nav flex-column">
+  <li class="nav-item mb-2">
+    <%= link_to "#",
+                class: "nav-link text-dark",
+                data: { action: "click->toggle#call" } do %>
+      <i class="fa-regular fa-square-caret-left"></i>
+    <% end %>
+  </li>
+
+  <% companies.each do |company| %>
+    <li class="nav-item">
+      <%= link_to company.name, company_path(company), class: "nav-link text-dark" %>
+    </li>
+  <% end %>
+</ul>
