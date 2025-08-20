@@ -1,0 +1,87 @@
+<div class="container py-4">
+    <div class="d-flex justify-content-between mb-5">
+    <%= link_to "< Retour","#" , class: "text-secondary text-decoration-underline" %>
+        <%= link_to "🗑","#",
+                  data: { turbo_method: :delete, turbo_confirm: "Supprimer cette entreprise ?" },
+                  class: "btn btn-outline-secondary " %>
+      </div>
+
+        <div class="card shadow-sm border-0 mb-4 rounded-4">
+          <div class="card-body p-4">
+            <div class="d-flex align-items-center gap-3">
+
+              <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
+                  style="width:64px;height:64px;font-weight:700;font-size:1.25rem;">
+                <%= @company.name.first(2).upcase %>
+              </div>
+
+              <div class="flex-grow-1">
+                <h1 class="h3 mb-1"><%= @company.name %></h1>
+                <div class="text-muted"><%= @company.activity %></div>
+              </div>
+
+              <div class="d-none d-md-flex flex-wrap gap-2">
+                <span class="badge bg-light text-dark border"> <%= @company.location %></span>
+                <span class="badge bg-light text-dark border"> <%= @company.size %></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-4">
+            <div class="card shadow-sm rounded-4 h-100">
+              <div class="card-body">
+                <div class="small text-uppercase text-muted mb-2">Localisation 📍</div>
+                <div class="fs-5"><%= @company.location %></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="card shadow-sm rounded-4 h-100">
+              <div class="card-body">
+                <div class="small text-uppercase text-muted mb-2">Taille 👥</div>
+                <div class="fs-5"><%= @company.size %></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-4">
+            <div class="card shadow-sm rounded-4 h-100">
+              <div class="card-body">
+                <div class="small text-uppercase text-muted mb-2">Activité 🏭</div>
+                <div class="fs-5"><%= @company.activity %></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-12 col-lg-6">
+            <div class="card shadow-sm rounded-4 h-100">
+              <div class="card-body">
+                <h2 class="h5 mb-3">Description 📝</h2>
+                <p class="mb-0 text-muted"><%= @company.description %></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="card shadow-sm rounded-4 h-100">
+              <div class="card-body">
+                <h2 class="h5 mb-3">Objectifs 🎯</h2>
+                <p class="mb-0 text-muted"><%= @company.objectives %></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-between gap-2 mt-4">
+            <%= link_to "Démarrer un chat","#", class: "btn btn-outline-primary" %>
+          <div class="d-flex justify-content-end gap-2">
+            <%= link_to "Éditer","#" , class: "btn btn-outline-secondary" %>
+          </div>
+        </div>
+</div>

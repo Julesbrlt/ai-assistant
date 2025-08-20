@@ -1,14 +1,18 @@
 <div class="container-fluid">
   <div class="row" data-controller="toggle">
-    <nav class="col-md-3 sidebar pt-3 border-end" data-toggle-target="hideable">
+    <nav class="col-md-2 sidebar pt-3 border-end" data-toggle-target="hideable">
       <%= render "shared/sidenav", companies: @companies %>
     </nav>
+
+   <nav class="col-1 sidebar pt-3 border-end m-0 d-none" data-toggle-target='show'>
     <main class="col-md-9 pt-3">
       <%= link_to "#",
-                  class: "d-none nav-link text-dark mb-3",
-                  data: { action: "click->toggle#call", toggle_target: "show" } do %>
+                  class: "nav-link text-dark mb-3",
+                  data: { action: "click->toggle#call" } do %>
         <i class="fa-regular fa-square-caret-right"></i>
       <% end %>
+    </nav>
+    <main class="col-md-10 pt-3">
       <div class="card mb-4 shadow-sm rounded-5">
         <img src="https://wallpapers.com/images/hd/blue-4k-firewall-web-spdkbjergnyqvzcf.jpg" class="card-img-top rounded-top-5" alt="Image entreprise" style="height: 50vh; object-fit: cover;">
         <div class="card-body mx-2">
