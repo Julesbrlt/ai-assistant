@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :companies, only: [:index, :new, :create, :show] do
-    resources :messages, only: [:new, :create]
+    resources :messages, only: [:new, :create, :index]
   end
 end
