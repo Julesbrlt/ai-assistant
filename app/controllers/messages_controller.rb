@@ -21,26 +21,36 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @company = Company.find(params[:company_id])
-    @message = Message.new(role: 'user', content: params[:message][:content], company: @company)
-    if @message.save
-      @chat = RubyLLM.chat
-      response = @chat.with_instructions(instructions).ask(@message.content)
-      Message.create(role: 'assistant', content: response.content, company: @company)
+    @chat = Chat.find(params[:chat_id])
+    @message = Message.new(message_params)
+    @message.role = 'user'
+    @message.chat = @chat
+    if @message.valid?
+      @chat.with_instructions(instructions).ask(@message.content)
+      respond_to do |format|
+        format.turbo_stream # renders `app/views/messages/create.turbo_stream.erb`
+        format.html { redirect_to chat_path(@chat) }
+      end
     else
-      render :new
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("new_message", partial: "messages/form", locals: { chat: @chat, message: @message }) }
+        format.html { render "chats/show", status: :unprocessable_entity }
+      end
     end
-    redirect_to company_messages_path
   end
 
   private
 
+  def message_params
+    params.require(:message).permit(:content)
+  end
+
   def company_context
-    "Here's everything you need to know about my company I tried to be the most specific possible. My activity : #{@company.activity},
-    description : #{@company.description}
-    objectives : #{@company.objectives}
-    location : #{@company.location}
-    size : #{@company.size}"
+    "Here's everything you need to know about my company I tried to be the most specific possible. My activity : #{@chat.company.activity},
+    description : #{@chat.company.description}
+    objectives : #{@chat.company.objectives}
+    location : #{@chat.company.location}
+    size : #{@chat.company.size}"
   end
 
   def instructions

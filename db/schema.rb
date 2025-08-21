@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_08_20_120848) do
+ActiveRecord::Schema[7.1].define(version: 2025_08_21_103413) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_20_120848) do
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.string "model_id"
+    t.index ["company_id"], name: "index_chats_on_company_id"
+    t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -37,9 +42,25 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_20_120848) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "company_id"
     t.string "role"
-    t.index ["company_id"], name: "index_messages_on_company_id"
+    t.bigint "chat_id"
+    t.string "model_id"
+    t.integer "input_tokens"
+    t.integer "output_tokens"
+    t.bigint "tool_call_id"
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["tool_call_id"], name: "index_messages_on_tool_call_id"
+  end
+
+  create_table "tool_calls", force: :cascade do |t|
+    t.bigint "message_id", null: false
+    t.string "tool_call_id"
+    t.string "name"
+    t.jsonb "arguments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["message_id"], name: "index_tool_calls_on_message_id"
+    t.index ["tool_call_id"], name: "index_tool_calls_on_tool_call_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -54,6 +75,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_08_20_120848) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "chats", "companies"
+  add_foreign_key "chats", "users"
   add_foreign_key "companies", "users"
-  add_foreign_key "messages", "companies"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "tool_calls"
+  add_foreign_key "tool_calls", "messages"
 end

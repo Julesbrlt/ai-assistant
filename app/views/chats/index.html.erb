@@ -1,0 +1,48 @@
+<div class="container my-5">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <div>
+      <h1 class="mb-1 text-primary fw-bold">Chats for <%= @company.name %></h1>
+      <p class="text-muted mb-0"><%= pluralize(@chats.size, "conversation") %> available</p>
+    </div>
+    <div>
+      <%= simple_form_for [@company, @chat], html: { class: "mb-0" } do |f| %>
+        <%= f.button :submit, "New chat", class: "btn btn-primary rounded-pill fw-bold shadow-sm" %>
+      <% end %>
+    </div>
+  </div>
+  <% if @chats.any? %>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% @chats.each do |chat| %>
+        <div class="col">
+          <div class="card h-100 shadow-sm border-0 rounded-4">
+            <div class="card-body">
+              <h5 class="card-title mb-1 fw-bold"><%= chat.title.presence || "Untitled chat" %></h5>
+              <p class="card-subtitle text-muted small mb-3">
+                Updated <%= time_ago_in_words(chat.updated_at) %> ago
+              </p>
+              <p class="text-muted small mb-0">
+                <% if chat.messages.any? %>
+                  <%= truncate(chat.messages.first.content.split(/(?<=\.)/).first(2).join(" "), length: 120) %>
+                <% else %>
+                  <em>No messages yet</em>
+                <% end %>
+              </p>
+            </div>
+            <div class="card-footer bg-white border-0 pt-0 pb-4 px-4">
+              <%= link_to "Open chat", chat_path(chat),
+                          class: "btn btn-outline-primary w-100 rounded-pill fw-semibold" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="card border-0 shadow-sm rounded-4">
+      <div class="card-body text-center p-5">
+        <div class="display-6 mb-3">💬</div>
+        <h4 class="fw-bold mb-2">No chats yet</h4>
+        <p class="text-muted mb-4">Create your first conversation to start getting AI-powered insights for your business.</p>
+      </div>
+    </div>
+  <% end %>
+</div>

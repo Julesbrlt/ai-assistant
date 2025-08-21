@@ -19,7 +19,7 @@
           <h2 class="card-title text-primary"><%= @companies.first.name %></h2>
           <p class="card-text"><%= @companies.first.description %></p>
           <div class="d-flex gap-2">
-            <%= link_to "Chat with our dedicated AI!", new_company_message_path(@companies.first), class: "btn btn-primary" %>
+            <%= link_to "Chat with our dedicated AI!", company_chats_path(@companies.first), class: "btn btn-primary" %>
             <%= link_to "Edit", "#", class: "btn btn-outline-secondary" %>
             <%= link_to "Supprimer", "#",
                         data: { turbo_method: :delete, turbo_confirm: "Supprimer cette entreprise ?" },

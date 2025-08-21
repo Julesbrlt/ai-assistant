@@ -1,3 +1,5 @@
 class Message < ApplicationRecord
-  belongs_to :company
+  acts_as_message
+
+  belongs_to :chat
 end

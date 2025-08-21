@@ -1,0 +1,17 @@
+<% messages.each do |message| %>
+        <% if message.role == "user" %>
+          <div class="d-flex justify-content-end mb-3" data-controller="auto-scroll">
+            <div class="bg-primary text-white rounded-4 p-3 shadow-sm" style="max-width: 70%;">
+              <div class="fw-bold small mb-1">You</div>
+              <div><%= message.content %></div>
+            </div>
+          </div>
+        <% else %>
+          <div class="d-flex justify-content-start mb-3">
+            <div class="bg-light rounded-4 p-3 border shadow-sm" style="max-width: 70%;">
+              <div class="fw-bold small text-muted mb-1">AI Assistant</div>
+              <div><%= message.content %></div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
