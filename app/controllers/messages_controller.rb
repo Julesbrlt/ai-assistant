@@ -27,12 +27,15 @@ class MessagesController < ApplicationController
     @message.chat = @chat
     if @message.valid?
       @chat.with_instructions(instructions).ask(@message.content)
-      if @chat.title == "untitled"
-        @chat.generate_title_from_first_message
+      respond_to do |format|
+        format.turbo_stream # renders `app/views/messages/create.turbo_stream.erb`
+        format.html { redirect_to chat_path(@chat) }
       end
-      redirect_to chat_path(@chat)
     else
-      render 'chats/show'
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("new_message", partial: "messages/form", locals: { chat: @chat, message: @message }) }
+        format.html { render "chats/show", status: :unprocessable_entity }
+      end
     end
   end
 
