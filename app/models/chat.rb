@@ -1,5 +1,7 @@
 class Chat < ApplicationRecord
-  # belongs_to :user
-  # belongs_to :company
-  # has_many :messages
+  acts_as_chat
+
+  belongs_to :user
+  belongs_to :company
+  has_many :messages, dependent: :destroy
 end
