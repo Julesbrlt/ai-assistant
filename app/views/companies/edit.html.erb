@@ -1,9 +1,6 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between mb-5">
-    <%= link_to "< Retour","#" , class: "text-secondary text-decoration-underline" %>
-        <%= link_to "🗑", company_path(@company),
-                  data: { turbo_method: :delete, turbo_confirm: "Supprimer cette entreprise ?" },
-                  class: "btn btn-outline-secondary " %>
+    <%= link_to "< Retour",company_path(@company) , class: "text-secondary text-decoration-underline" %>
       </div>
 
         <div class="card shadow-sm border-0 mb-4 rounded-4">
@@ -15,35 +12,29 @@
                 <%= @company.name.first(2).upcase %>
               </div>
 
+      <%= form_with(model: @company, local: true,  url: company_path(@company), method: :patch) do |f| %>
               <div class="flex-grow-1">
-                <h1 class="h3 mb-1"><%= @company.name %></h1>
+                <h1 class="h3 mb-1"><%= f.text_field :name, class: "form-control" %></h1>
                 <div class="text-muted"><%= @company.activity %></div>
-              </div>
-
-              <div class="d-none d-md-flex flex-wrap gap-2">
-                <span class="badge bg-light text-dark border"> <%= @company.location %></span>
-                <span class="badge bg-light text-dark border"> <%= @company.size %></span>
               </div>
             </div>
           </div>
         </div>
-
 
         <div class="row g-3 mb-4">
           <div class="col-12 col-md-4">
             <div class="card shadow-sm rounded-4 h-100">
               <div class="card-body">
                 <div class="small text-uppercase text-muted mb-2">Localisation 📍</div>
-                <div class="fs-5"><%= @company.location %></div>
+                <div class="fs-5"><%= f.text_field :location, class: "form-control" %></div>
               </div>
             </div>
           </div>
-
           <div class="col-12 col-md-4">
             <div class="card shadow-sm rounded-4 h-100">
               <div class="card-body">
                 <div class="small text-uppercase text-muted mb-2">Taille 👥</div>
-                <div class="fs-5"><%= @company.size %></div>
+                <div class="fs-5"><%= f.select :size, options_for_select([["", ""], "1-10", "11-50", "51-200", "201-500", "500+"])%></div>
               </div>
             </div>
           </div>
@@ -52,7 +43,7 @@
             <div class="card shadow-sm rounded-4 h-100">
               <div class="card-body">
                 <div class="small text-uppercase text-muted mb-2">Activité 🏭</div>
-                <div class="fs-5"><%= @company.activity %></div>
+                <div class="fs-5"><%= f.text_field :activity, class: "form-control" %></div>
               </div>
             </div>
           </div>
@@ -63,7 +54,7 @@
             <div class="card shadow-sm rounded-4 h-100">
               <div class="card-body">
                 <h2 class="h5 mb-3">Description 📝</h2>
-                <p class="mb-0 text-muted"><%= @company.description %></p>
+                <p class="mb-0 text-muted"><%= f.text_area :description, class: "form-control" %></p>
               </div>
             </div>
           </div>
@@ -72,16 +63,14 @@
             <div class="card shadow-sm rounded-4 h-100">
               <div class="card-body">
                 <h2 class="h5 mb-3">Objectifs 🎯</h2>
-                <p class="mb-0 text-muted"><%= @company.objectives %></p>
+                <p class="mb-0 text-muted"><%= f.text_area :objectives, class: "form-control" %></p>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="d-flex justify-content-between gap-2 mt-4">
-            <%= link_to "Démarrer un chat","#", class: "btn btn-outline-primary" %>
-          <div class="d-flex justify-content-end gap-2">
-            <%= link_to "Éditer", edit_company_path(@company), class: "btn btn-outline-secondary" %>
+          <div class="d-flex justify-content-end gap-2 mt-4">
+            <%= f.submit "Sauvegarder les changements", class: "btn btn-outline-secondary" %>
           </div>
-        </div>
+      <% end %>
 </div>
