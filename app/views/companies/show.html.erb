@@ -3,7 +3,10 @@
     <%= link_to "< Retour","#" , class: "text-secondary text-decoration-underline" %>
         <%= link_to "🗑", company_path(@company),
                   data: { turbo_method: :delete, turbo_confirm: "Supprimer cette entreprise ?" },
-                  class: "btn btn-outline-secondary " %>
+                  class: "btn-delete" do %>
+                  <i class="fa-solid fa-trash"></i>
+                  Supprimer
+                  <% end %>
       </div>
 
         <div class="card shadow-sm border-0 mb-4 rounded-4">
@@ -79,9 +82,16 @@
         </div>
 
         <div class="d-flex justify-content-between gap-2 mt-4">
-            <%= link_to "Démarrer un chat","#", class: "btn btn-outline-primary" %>
+            <%= link_to "Démarrer un chat","#", class: "btn-cta" %>
           <div class="d-flex justify-content-end gap-2">
+<<<<<<< HEAD
+            <%= link_to "#" , class: "btn-edit" do  %>
+            <i class="fa-regular fa-pen-to-square"></i>
+             Editer
+            <% end %>
+=======
             <%= link_to "Éditer", edit_company_path(@company), class: "btn btn-outline-secondary" %>
+>>>>>>> master
           </div>
         </div>
 </div>
