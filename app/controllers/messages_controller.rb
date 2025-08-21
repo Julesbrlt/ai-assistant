@@ -27,7 +27,7 @@ class MessagesController < ApplicationController
     @message.chat = @chat
     if @message.valid?
       @chat.with_instructions(instructions).ask(@message.content)
-      respond_to do |format|
+        respond_to do |format|
         format.turbo_stream # renders `app/views/messages/create.turbo_stream.erb`
         format.html { redirect_to chat_path(@chat) }
       end
