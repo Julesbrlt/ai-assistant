@@ -1,6 +1,6 @@
 <div class="container py-4">
     <div class="d-flex justify-content-between mb-5">
-    <%= link_to "< Retour", companies_path , class: "text-secondary text-decoration-underline" %>
+    <%= link_to "< Retour", companies_path, class: "text-secondary text-decoration-underline" %>
         <%= link_to company_path(@company),
                   data: { turbo_method: :delete, turbo_confirm: "Supprimer cette entreprise ?" },
                   class: "btn-delete" do %>
