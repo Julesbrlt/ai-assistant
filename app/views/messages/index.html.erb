@@ -8,6 +8,10 @@
             <div class="bg-primary text-white rounded-4 p-3 shadow-sm" style="max-width: 70%;">
               <div class="fw-bold small mb-1">You</div>
               <div><%= message.content %></div>
+              <% if message.file.attached? %>
+                <strong>File:</strong>
+                <%= link_to message.file.filename, rails_blob_path(message.file, disposition: "attachment") %>
+              <% end %>
             </div>
           </div>
         <% else %>

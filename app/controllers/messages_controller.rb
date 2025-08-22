@@ -1,23 +1,21 @@
 class MessagesController < ApplicationController
 
-  SYSTEM_PROMPT = "You are an AI expert in business strategy and entrepreneurial support.
+  SYSTEM_PROMPT = "You are an AI expert in business strategy and entrepreneurial support and very pedagogical
   You analyze the needs of companies and provide clear, personalized, and actionable advice to improve their performance and achieve their goals.
   The user is an entrepreneur who has just registered on the application and entered information about their company (industry, size, description, objectives, location).
-  Based on the data provided by the user, generate a plan of practical and tailored recommendations for their business.
+  Based on the data provided by the user, generate a plan of practical and tailored recommendations for their business
+
+  Explain it
   The advice should focus on growth, marketing strategy, internal optimization, or any other priority linked to the defined objectives.
-  Present the response in a structured format in different paragraphs and write the paragraph's title in bold. Paragraphs should be :
-  1 -> short summary of the company profile
-  2 -> brief analysis of the objectives including strengths, risks, and opportunities.
-  3 -> three concrete and directly actionable strategic recommendations.
-  4-> one suggested next step to move forward."
+
+  Analyze deeply and precisely the content of the files given if there are ones.
+
+  Be consice !!
+
+  Provide step-by-step instructions in bullet points, using markdown"
 
   def index
     @company = Company.find(params[:company_id])
-  end
-
-  def new
-    @company = Company.find(params[:company_id])
-    @message = Message.new
   end
 
   def create
@@ -25,10 +23,15 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.role = 'user'
     @message.chat = @chat
-    if @message.valid?
-      @chat.with_instructions(instructions).ask(@message.content)
+    if @message.save
+      if @message.file.attached?
+        process_file(@message.file)
+      else
+        send_question
+      end
+      Message.create(role: "assistant", content: @response.content, chat: @chat)
         respond_to do |format|
-        format.turbo_stream # renders `app/views/messages/create.turbo_stream.erb`
+        format.turbo_stream
         format.html { redirect_to chat_path(@chat) }
       end
     else
@@ -39,10 +42,31 @@ class MessagesController < ApplicationController
     end
   end
 
+  def process_file(file)
+    if file.content_type == "application/pdf"
+      send_question(model: "gemini-2.0-flash", with: { pdf: @message.file.url })
+
+    elsif file.image?
+      send_question(model: "gpt-4o", with: { image: @message.file.url })
+    end
+  end
+
+  def send_question(model: "gpt-4.1-nano", with: {})
+    @ruby_llm_chat = RubyLLM.chat(model: model)
+    build_conversation_history
+    @response = @ruby_llm_chat.with_instructions(instructions).ask(@message.content, with: with)
+  end
+
+  def build_conversation_history
+    @chat.messages.each do |message|
+      @ruby_llm_chat.add_message(content: message.content, role: message.role)
+    end
+  end
+
   private
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :file)
   end
 
   def company_context

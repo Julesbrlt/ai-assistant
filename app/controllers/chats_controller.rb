@@ -22,4 +22,11 @@ class ChatsController < ApplicationController
       render :index
     end
   end
+
+  def destroy
+    @company = Company.find(params[:company_id])
+    @chat = Chat.find(params[:id])
+    @chat.destroy
+    redirect_to company_chats_path(@company), status: :see_other
+  end
 end
