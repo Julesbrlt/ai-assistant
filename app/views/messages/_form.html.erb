@@ -1,4 +1,5 @@
   <%= simple_form_for [chat, message] do |f| %>
     <%= f.input :content, placeholder: "Pose ta question!", required: true, label: false %>
+    <%= f.input :file, as: :file %>
     <%= f.button :submit, 'Ask ByB', class: 'btn btn-primary' %>
   <% end %>

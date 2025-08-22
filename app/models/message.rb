@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
-  acts_as_message
 
   belongs_to :chat
+  has_one_attached :file
 end
