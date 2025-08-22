@@ -17,7 +17,14 @@
         <div class="col">
           <div class="card h-100 shadow-sm border-0 rounded-4">
             <div class="card-body">
-              <h5 class="card-title mb-1 fw-bold"><%= chat.title.presence || "Untitled chat" %></h5>
+              <div class='d-flex justify-content-between'>
+                <h5 class="card-title mb-1 fw-bold"><%= chat.title.presence || "Untitled chat" %></h5>
+                <%= link_to company_chat_path(@company, chat),
+                  data: { turbo_method: :delete, turbo_confirm: "Supprimer ce chat ?" },
+                  class: "btn-delete" do %>
+                  <i class="fa-solid fa-trash"></i>
+                  <% end %>
+              </div>
               <p class="card-subtitle text-muted small mb-3">
                 Updated <%= time_ago_in_words(chat.updated_at) %> ago
               </p>

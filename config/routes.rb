@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :companies, only: [:index, :new, :create, :show, :edit, :destroy] do
-    resources :chats, only: [:create, :index]
+    resources :chats, only: [:create, :index, :destroy]
   end
 
-  resources :chats, only: :show do
+  resources :chats, only: [:show] do
     resources :messages, only: [:create]
   end
 end
