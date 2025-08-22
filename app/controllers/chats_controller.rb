@@ -4,11 +4,13 @@ class ChatsController < ApplicationController
     @company = Company.find(params[:company_id])
     @chats = current_user.chats.where(company: @company)
     @chat = Chat.new
+    @companies = current_user.companies
   end
 
   def show
     @chat = Chat.find(params[:id])
     @message = Message.new
+    @companies = current_user.companies
   end
 
   def create
