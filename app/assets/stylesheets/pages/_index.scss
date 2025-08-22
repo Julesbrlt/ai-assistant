@@ -19,3 +19,11 @@ background-color: #ffffff;
     object-fit: cover;
   }
 }
+
+.user-message {
+  background-color: $user-message;
+}
+
+.chat {
+  color: $user-message;
+}

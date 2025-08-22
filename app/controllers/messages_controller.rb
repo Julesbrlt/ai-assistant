@@ -1,18 +1,12 @@
 class MessagesController < ApplicationController
 
-  SYSTEM_PROMPT = "You are an AI expert in business strategy and entrepreneurial support and very pedagogical
-  You analyze the needs of companies and provide clear, personalized, and actionable advice to improve their performance and achieve their goals.
-  The user is an entrepreneur who has just registered on the application and entered information about their company (industry, size, description, objectives, location).
-  Based on the data provided by the user, generate a plan of practical and tailored recommendations for their business
+  SYSTEM_PROMPT = "Tu es un consultant expérimenté auprès des entrepreneurs.
 
-  Explain it
-  The advice should focus on growth, marketing strategy, internal optimization, or any other priority linked to the defined objectives.
+Je suis un entrepreneur ; l'activité de mon entreprise est en baisse et je recherche des conseils sur les méthodes business.
 
-  Analyze deeply and precisely the content of the files given if there are ones.
+Guide-moi pour développer mon entreprise en t'appuyant sur les informations reçues.
 
-  Be consice !!
-
-  Provide step-by-step instructions in bullet points, using markdown"
+Fournis des instructions étape par étape sous forme de listes"
 
   def index
     @company = Company.find(params[:company_id])
