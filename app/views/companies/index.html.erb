@@ -1,73 +1,74 @@
 <div class="container-fluid">
   <div class="row" data-controller="toggle">
+
+    <!-- Sidebar principale -->
     <nav class="col-md-2 sidebar pt-3 border-end" data-toggle-target="hideable">
       <%= render "shared/sidenav", companies: @companies %>
     </nav>
 
-    <nav class="col-1 sidebar pt-3 border-end m-0 d-none" data-toggle-target='show'>
-      <main class="col-md-9 pt-3">
-      </nav>
+    <!-- Sidebar secondaire -->
+    <nav class="col-1 sidebar pt-3 border-end m-0 d-none" data-toggle-target="show">
+    </nav>
 
-      <main class="col-md-10 pt-3">
+    <!-- Contenu principal -->
+    <main class="col-md-10 pt-3">
 
       <div class="d-flex justify-content-end mb-4">
         <%= link_to "➕ Nouvelle entreprise", new_company_path, class: "btn-more" %>
       </div>
 
-        <div class="card mb-4 shadow-sm">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Image entreprise" style="height: 50vh; object-fit: cover;">
-          <div class="card-body mx-2">
-            <h2 class="card-title"><%= @companies.first.name %></h2>
-            <p class="card-text"><%= @companies.first.description %></p>
-            <div class="d-flex gap-2">
-              <%= link_to "Chat with our dedicated AI!", company_chats_path(@companies.first), class: "btn-cta" %>
+      <div class="card mb-4 shadow-sm">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+             class="card-img-top" alt="Image entreprise"
+             style="height: 50vh; object-fit: cover;">
+        <div class="card-body mx-2">
+          <h2 class="card-title"><%= @companies.first.name %></h2>
+          <p class="card-text"><%= @companies.first.description %></p>
+          <div class="d-flex gap-2">
+            <%= link_to "Chat with our dedicated AI!", company_chats_path(@companies.first), class: "btn-cta" %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section news -->
+      <div class="row mt-5">
+        <h3 class="mb-4">📰 Dernières actualités business</h3>
+
+        <div class="col-md-4 mb-5">
+          <div class="card news-card shadow-sm mb-3 h-100">
+            <img src="https://picsum.photos/400/200?random=1" alt="IA et travail" class="card-img-top news-img">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">L’IA transforme le marché du travail</h5>
+              <p class="card-text flex-grow-1">Un rapport montre que l’IA impactera 40% des métiers d’ici 2030...</p>
+              <a href="https://www.example.com/ia-travail" target="_blank" class="btn-more">🔗 Lire l'article</a>
             </div>
           </div>
         </div>
 
-<div class="row mt-5">
-  <h3 class="mb-4">📰 Dernières actualités business</h3>
+        <div class="col-md-4 mb-5">
+          <div class="card news-card shadow-sm mb-3 h-100">
+            <img src="https://picsum.photos/400/200?random=2" alt="Startups françaises" class="card-img-top news-img">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Investissements record dans les startups françaises</h5>
+              <p class="card-text flex-grow-1">Les levées de fonds dépassent 10 milliards cette année, un record historique...</p>
+              <a href="https://www.example.com/startups-fr" target="_blank" class="btn-more">🔗 Lire l'article</a>
+            </div>
+          </div>
+        </div>
 
-  <div class="col-md-4 mb-5">
-    <div class="card news-card shadow-sm mb-3 h-100">
-      <img src="https://picsum.photos/400/200?random=1" alt="IA et travail" class="card-img-top news-img">
-      <div class="card-body d-flex flex-column">
-        <h5 class="card-title">L’IA transforme le marché du travail</h5>
-        <p class="card-text flex-grow-1">Un rapport montre que l’IA impactera 40% des métiers d’ici 2030...</p>
-        <a href="https://www.example.com/ia-travail" target="_blank" class= "btn-more">
-          🔗 Lire l'article
-        </a>
-      </div>
-    </div>
-  </div>
+        <div class="col-md-4 mb-5">
+          <div class="card news-card shadow-sm mb-3 h-100">
+            <img src="https://picsum.photos/400/200?random=3" alt="Cybersécurité" class="card-img-top news-img">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">La cybersécurité, priorité des entreprises</h5>
+              <p class="card-text flex-grow-1">Avec l’augmentation des cyberattaques, les sociétés investissent massivement...</p>
+              <a href="https://www.example.com/cybersecurite" target="_blank" class="btn-more">🔗 Lire l'article</a>
+            </div>
+          </div>
+        </div>
 
-  <div class="col-md-4 mb-5">
-    <div class="card news-card shadow-sm mb-3 h-100">
-      <img src="https://picsum.photos/400/200?random=2" alt="Startups françaises" class="card-img-top news-img">
-      <div class="card-body d-flex flex-column">
-        <h5 class="card-title">Investissements record dans les startups françaises</h5>
-        <p class="card-text flex-grow-1">Les levées de fonds dépassent 10 milliards cette année, un record historique...</p>
-        <a href="https://www.example.com/startups-fr" target="_blank" class= "btn-more">
-          🔗 Lire l'article
-        </a>
-      </div>
-    </div>
-  </div>
+      </div> <!-- /row news -->
 
-  <div class="col-md-4 mb-5">
-    <div class="card news-card shadow-sm mb-3 h-100">
-      <img src="https://picsum.photos/400/200?random=3" alt="Cybersécurité" class="card-img-top news-img">
-      <div class="card-body d-flex flex-column">
-        <h5 class="card-title">La cybersécurité, priorité des entreprises</h5>
-        <p class="card-text flex-grow-1">Avec l’augmentation des cyberattaques, les sociétés investissent massivement...</p>
-        <a href="https://www.example.com/cybersecurite" target="_blank" class= "btn-more">
-          🔗 Lire l'article
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-</main>
-</div>
-
-  </div>
+    </main>
+  </div> <!-- /row -->
+</div> <!-- /container-fluid -->
